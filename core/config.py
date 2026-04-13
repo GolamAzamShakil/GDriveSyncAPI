@@ -40,7 +40,7 @@ DEFAULT_CLOCK_ENABLED    = False
 DEFAULT_CLOCK_TIMES: List[str] = ["09:00", "18:00"]
 
 APP_NAME = "GDrive Sync API"
-JWT_SECRET    = os.environ.get("JWT_SECRET", "changeme-use-a-long-random-secret")
+JWT_SECRET = _require_env("JWT_SECRET")  # os.environ.get("JWT_SECRET", "changeThisJWT")
 JWT_ALGORITHM = "HS256"
 JWT_EXPIRE_MINUTES = int(os.environ.get("JWT_EXPIRE_MINUTES", "60"))
 
@@ -57,13 +57,13 @@ def _build_folder_mappings() -> "List":
     from core.state import FolderMapping
     return [
         FolderMapping(
-            local_path  = r"H:\myDrive\uploadSync\rclone\esratGdrive\Documents",
-            rclone_dest = "11esrat11Gdrive:rclone/Documents",
+            local_path  = r"H:\folder\Documents",
+            rclone_dest = "destName:rclone/Documents",
             label       = "GdriveDocuments",
         ),
         FolderMapping(
-            local_path  = r"H:\myDrive\uploadSync\rclone\esratGdrive\Photos",
-            rclone_dest = "11esrat11Gdrive:rclone/Photos",
+            local_path  = r"H:\folder\Photos",
+            rclone_dest = "destName:rclone/Photos",
             label       = "GdrivePhotos",
         ),
     ]
